@@ -65,5 +65,18 @@ public class StreamUtilitiesTest {
 		assertEquals(1, filteredList.size());
 		assertEquals(theBigComeUp.getName(), filteredList.get(0).getName());
 	}
+	
+	/**
+	 * Testing for {@link StreamUtilities#countTotalArtists(List)}.
+	 */
+	@Test
+	public void testCountTotalArtists() {
+		Artist blackKeys = new Artist(Arrays.asList("Dan Auerbach", "Patrick Carney"), 
+				"Akron, Ohio", "The Black Keys");
+		Artist theBeatles = new Artist(Arrays.asList("John Lennon", "Paul McCartney", 
+				"George Harrison", "Ringo Starr"), "Liverpool, UK", "The Beatles");
+		assertEquals(6, StreamUtilities.countTotalArtists(Arrays.asList(blackKeys, 
+				theBeatles).stream()));
+	}
 
 }

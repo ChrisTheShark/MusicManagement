@@ -46,5 +46,16 @@ public final class StreamUtilities {
 		return albums.filter(album -> album.getTracks().count() < 3).collect(
 				Collectors.toList());
 	}
+	
+	/**
+	 * Count total number of members with the {@link Stream} of
+	 * {@link Artist}s.
+	 * @param artists the {@link Stream} of {@link Artist}s
+	 * @return total count of all members
+	 */
+	public static int countTotalArtists(Stream<Artist> artists) {
+		return artists.map(artist -> Long.valueOf(artist.getMembers().count()).intValue())
+			.reduce(0, (accumulator, memberCount) -> accumulator + memberCount);
+	}
 
 }
