@@ -1,9 +1,13 @@
 package com.dyer.music.utility;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -77,6 +81,31 @@ public class StreamUtilitiesTest {
 				"George Harrison", "Ringo Starr"), "Liverpool, UK", "The Beatles");
 		assertEquals(6, StreamUtilities.countTotalArtists(Arrays.asList(blackKeys, 
 				theBeatles).stream()));
+	}
+	
+	/**
+	 * Testing for {@link StreamUtilities#countLowerCaseCharactersInString(String)}.
+	 */
+	@Test
+	public void testCountLowerCaseCharactersInString() {
+		assertEquals(4, StreamUtilities.countLowerCaseCharactersInString("Cases"));
+		assertEquals(4, StreamUtilities.countLowerCaseCharactersInString("caseS"));
+		assertEquals(4, StreamUtilities.countLowerCaseCharactersInString("cAses"));
+	}
+	
+	/**
+	 * Testing for {@link StreamUtilities#findLargestNumberOfLowerCaseLetters(List)}.
+	 */
+	@Test
+	public void testFindLargestNumberOfLowerCaseLetter() {
+		List<String> inputs = Collections.emptyList();
+		Optional<String> output = StreamUtilities.findLargestNumberOfLowerCaseLetters(inputs);
+		assertFalse("Value should not be present.", output.isPresent());
+		
+		inputs = Arrays.asList("Charlie", "CHarlie", "CHArlie", "charlie");
+		output = StreamUtilities.findLargestNumberOfLowerCaseLetters(inputs);
+		assertTrue("Value should be present.", output.isPresent());
+		assertEquals("charlie", output.get());
 	}
 
 }
